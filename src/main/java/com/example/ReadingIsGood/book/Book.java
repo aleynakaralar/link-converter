@@ -1,6 +1,5 @@
-package com.example.ReadingIsGood.customer;
+package com.example.ReadingIsGood.book;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,11 +11,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @Builder
-@Document(collection = "customers")
-public class Customer {
+@Document(collection = "books")
+public class Book {
+
     @Id
     private String id;
-    private String name;
-    private String phoneNumber;
-    private String address;
+    private String bookName;
+    private String author;
+    private double price;
+    private int stock;
 }
