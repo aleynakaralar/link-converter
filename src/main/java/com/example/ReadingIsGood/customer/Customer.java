@@ -19,4 +19,6 @@ public class Customer {
     private String name;
     private String phoneNumber;
     private String address;
+    private double orderCount;
+    private boolean isBlackListed;
 }

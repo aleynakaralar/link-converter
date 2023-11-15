@@ -10,4 +10,5 @@ public class UpdateCustomerRequest {
     private String name;
     private String phone;
     private String address;
+    private boolean isBlackListed;
 }

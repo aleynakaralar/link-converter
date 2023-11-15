@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateBookRequest {
-
     private String bookName;
     private String author;
     private double price;

@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateBookRequest {
-
     private double price;
     private int stock;
 }
