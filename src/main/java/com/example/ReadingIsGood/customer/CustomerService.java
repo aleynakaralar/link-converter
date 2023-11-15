@@ -61,7 +61,13 @@ public class CustomerService {
         return null;
     }
 
-
+    public Customer getCustomerById(String customerId) {
+        Optional<Customer> optionalCustomer = repository.findById(customerId);
+        if (optionalCustomer.isEmpty()) {
+            throw new RuntimeException("CUSTOMER NOT FOUND");
+        }
+        return optionalCustomer.get();
+    }
 }
 
 

@@ -65,4 +65,13 @@ public class BookService {
         }
         return null;
     }
+
+    public Book getBookById(String id) {
+        Optional<Book> optionalBook = repository.findById(id);
+        if (optionalBook.isEmpty()) {
+            throw new RuntimeException("BOOK NOT FOUND");
+        }
+        Book book = optionalBook.get();
+        return book;
+    }
 }

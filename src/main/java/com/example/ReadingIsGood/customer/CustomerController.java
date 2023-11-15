@@ -2,6 +2,7 @@ package com.example.ReadingIsGood.customer;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,16 @@ public class CustomerController {
     @DeleteMapping("/delete-customer/{id}")
     public void deleteCustomer(@PathVariable String id) {
         customerService.deleteExistingCustomer(id);
+    }
+
+    @GetMapping("/customer/by-id/{id}")
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable String id) {
+        Customer customer = customerService.getCustomerById(id);
+        CustomerDTO dto = CustomerDTO.builder()
+                .id(customer.getId())
+                .phoneNumber(customer.getPhoneNumber())
+                .name(customer.getName())
+                .build();
+        return ResponseEntity.ok(dto);
     }
 }

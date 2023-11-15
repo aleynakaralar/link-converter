@@ -2,10 +2,9 @@ package com.example.ReadingIsGood.book;
 
 import com.example.ReadingIsGood.customer.Customer;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 @RestController
 @AllArgsConstructor
 public class BookController {
@@ -33,5 +32,14 @@ public class BookController {
     @DeleteMapping("/delete-book{id}")
     public void deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
+    }
+    @GetMapping("/book/by-id/{id}")
+    public ResponseEntity<BookDTO> getBookDetail(@PathVariable String id) {
+      Book book = bookService.getBookById(id);
+      BookDTO dto = BookDTO.builder()
+              .price(book.getPrice())
+              .stock(book.getStock())
+              .build();
+      return ResponseEntity.ok(dto);
     }
 }
