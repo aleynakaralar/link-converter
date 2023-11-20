@@ -1,6 +1,8 @@
 package com.example.ReadingIsGood.customer;
 
 
+import com.example.ReadingIsGood.order.Order;
+import com.example.ReadingIsGood.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,12 +15,16 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository repository;
+    private OrderService orderService;
+
     public List<Customer> getCustomers() {
         return repository.findAll();
     }
+
     public void addNewCustomer(Customer customer) {
         repository.insert(customer);
     }
+
     public void updateExistingCustomer(UpdateCustomerRequest request, String id) {
         Optional<Customer> optionalCustomer = repository.findById(id);
         if (optionalCustomer.isEmpty()) {
@@ -31,13 +37,15 @@ public class CustomerService {
         customer.setBlackListed(request.isBlackListed());
         repository.save(customer);
     }
+
     public void deleteExistingCustomer(String id) {
-       Optional<Customer> optionalCustomer = repository.findById(id);
-       if (optionalCustomer.isEmpty()) {
-           throw new RuntimeException("USER NOT FOUND");
-       }
-       repository.delete(optionalCustomer.get());
+        Optional<Customer> optionalCustomer = repository.findById(id);
+        if (optionalCustomer.isEmpty()) {
+            throw new RuntimeException("USER NOT FOUND");
+        }
+        repository.delete(optionalCustomer.get());
     }
+
     public void incrementCustomerOrderCount(String customerId) {
         Optional<Customer> optionalCustomer = repository.findById(customerId);
         if (optionalCustomer.isEmpty()) {
@@ -49,16 +57,16 @@ public class CustomerService {
         customer.setOrderCount(incrementedCount);
         repository.save(customer);
     }
-    public ResponseEntity<Object> checkIsBlackListedValue(String customerId) {
+
+    public void checkIsBlackListedValue(String customerId) {
         Optional<Customer> optionalCustomer = repository.findById(customerId);
         if (optionalCustomer.isEmpty()) {
             throw new RuntimeException("USER NOT FOUND");
         }
         Customer customer = optionalCustomer.get();
-        if (customer.isBlackListed()){
+        if (customer.isBlackListed()) {
             throw new CustomerNotOrderedException();
         }
-        return null;
     }
 
     public Customer getCustomerById(String customerId) {
@@ -68,12 +76,11 @@ public class CustomerService {
         }
         return optionalCustomer.get();
     }
+
+
+
+
 }
-
-
-
-
-
 
 
 

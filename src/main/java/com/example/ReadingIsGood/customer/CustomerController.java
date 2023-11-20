@@ -13,7 +13,7 @@ public class CustomerController {
 
     private final CustomerService customerService;
     @GetMapping("/customer-list")
-    public List allCustomers() {
+    public List<Customer> allCustomers() {
         return customerService.getCustomers();
     }
     @PostMapping("/add-customer")
@@ -46,4 +46,7 @@ public class CustomerController {
                 .build();
         return ResponseEntity.ok(dto);
     }
+
+
+
 }
