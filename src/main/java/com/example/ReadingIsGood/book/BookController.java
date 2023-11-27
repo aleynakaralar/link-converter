@@ -1,6 +1,6 @@
 package com.example.ReadingIsGood.book;
 
-import com.example.ReadingIsGood.customer.Customer;
+import com.example.ReadingIsGood.analytics.BookAnalyticsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookController {
     private final BookService bookService;
+    private final BookAnalyticsService bookAnalyticsService;
 
     @GetMapping("/book-list")
     public List<Book> allBooks() {
@@ -22,13 +23,14 @@ public class BookController {
                 .author(request.getAuthor())
                 .price(request.getPrice())
                 .stock(request.getStock())
+                .bookOrderCount(request.getBookOrderCount())
                 .build();
         bookService.addBook(book);
     }
 
     @PutMapping("/update-book{id}")
     public void updateBook(@RequestBody UpdateBookRequest request, @PathVariable String id) {
-        bookService.updateExistingBook(request,id);
+        bookService.updateExistingBook(request, id);
     }
 
     @DeleteMapping("/delete-book{id}")
@@ -38,11 +40,17 @@ public class BookController {
 
     @GetMapping("/book/by-id/{id}")
     public ResponseEntity<BookDTO> getBookDetail(@PathVariable String id) {
-      Book book = bookService.getBookById(id);
-      BookDTO dto = BookDTO.builder()
-              .price(book.getPrice())
-              .stock(book.getStock())
-              .build();
-      return ResponseEntity.ok(dto);
+        Book book = bookService.getBookById(id);
+        BookDTO dto = BookDTO.builder()
+                .price(book.getPrice())
+                .stock(book.getStock())
+                .build();
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/book/get-top-three-books")
+    public String getTopThreeBooks() {
+        return bookAnalyticsService.getTopThreeBooks();
+
     }
 }

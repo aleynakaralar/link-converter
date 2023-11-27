@@ -55,6 +55,19 @@ public class BookService {
         }
         repository.saveAll(updatedBooks);
     }
+
+    public void incrementOrderCount(List<String> bookIds) {
+        List<Book> books = repository.findAllById(bookIds);
+        List<Book> updatedBook = new ArrayList<>();
+        for (Book b : books) {
+            int bookOrderCount = b.getBookOrderCount();
+            int incrementOrder = bookOrderCount + 1 ;
+            b.setBookOrderCount(incrementOrder);
+            updatedBook.add(b);
+        }
+        repository.saveAll(updatedBook);
+    }
+
     public ResponseEntity<Object> checkStockCount(List<String> bookIds) {
         List<Book> books = repository.findAllById(bookIds);
         for (Book b : books){
@@ -66,6 +79,8 @@ public class BookService {
         return null;
     }
 
+
+
     public Book getBookById(String id) {
         Optional<Book> optionalBook = repository.findById(id);
         if (optionalBook.isEmpty()) {
@@ -74,4 +89,7 @@ public class BookService {
         Book book = optionalBook.get();
         return book;
     }
+
+
+
 }

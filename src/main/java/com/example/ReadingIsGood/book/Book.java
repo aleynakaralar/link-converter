@@ -19,4 +19,5 @@ public class Book {
     private String author;
     private double price;
     private int stock;
+    private int bookOrderCount = 0;
 }

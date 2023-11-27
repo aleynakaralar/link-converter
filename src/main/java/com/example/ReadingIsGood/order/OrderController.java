@@ -1,5 +1,6 @@
 package com.example.ReadingIsGood.order;
 
+import com.example.ReadingIsGood.book.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @RestController
 public class OrderController {
     private final OrderService orderService;
+    private final BookService bookService;
 
     @GetMapping("/order-list")
     public List<Order> allOrders() {

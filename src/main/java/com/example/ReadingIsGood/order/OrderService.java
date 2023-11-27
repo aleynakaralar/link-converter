@@ -2,14 +2,9 @@ package com.example.ReadingIsGood.order;
 
 import com.example.ReadingIsGood.book.BookService;
 import com.example.ReadingIsGood.customer.CustomerService;
-import com.mongodb.BasicDBObject;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -36,6 +31,7 @@ public class OrderService {
                 .build();
         customerService.incrementCustomerOrderCount(request.getCustomerId());
         bookService.decrementStockCount(request.getBooks());
+        bookService.incrementOrderCount(request.getBooks());
         repository.insert(order);
     }
 
@@ -69,4 +65,6 @@ public class OrderService {
                 .map(Order::getCustomerId)
                 .collect(Collectors.toList());
     }
+
+
 }
