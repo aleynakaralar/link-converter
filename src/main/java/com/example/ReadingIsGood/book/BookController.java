@@ -9,8 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 public class BookController {
     private final BookService bookService;
-    private final BookAnalyticsService bookAnalyticsService;
-
     @GetMapping("/book-list")
     public List<Book> allBooks() {
         return bookService.getBooks();
@@ -48,9 +46,4 @@ public class BookController {
         return ResponseEntity.ok(dto);
     }
 
-    @GetMapping("/book/get-top-three-books")
-    public String getTopThreeBooks() {
-        return bookAnalyticsService.getTopThreeBooks();
-
-    }
 }
