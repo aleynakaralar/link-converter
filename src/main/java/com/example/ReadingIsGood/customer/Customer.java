@@ -19,6 +19,6 @@ public class Customer {
     private String name;
     private String phoneNumber;
     private String address;
-    private double orderCount;
+    private int customerOrderCount = 0;
     private boolean isBlackListed;
 }

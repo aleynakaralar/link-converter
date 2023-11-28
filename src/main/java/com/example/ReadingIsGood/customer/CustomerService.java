@@ -52,9 +52,9 @@ public class CustomerService {
             throw new RuntimeException("USER NOT FOUND");
         }
         Customer customer = optionalCustomer.get();
-        double orderCount = customer.getOrderCount();
-        double incrementedCount = orderCount + 1;
-        customer.setOrderCount(incrementedCount);
+        int customerOrderCount = customer.getCustomerOrderCount();
+        int incrementedCount = customerOrderCount + 1;
+        customer.setCustomerOrderCount(incrementedCount);
         repository.save(customer);
     }
 
