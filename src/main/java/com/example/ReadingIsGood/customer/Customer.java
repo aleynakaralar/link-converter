@@ -1,6 +1,5 @@
 package com.example.ReadingIsGood.customer;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,4 +20,21 @@ public class Customer {
     private String address;
     private int customerOrderCount = 0;
     private boolean isBlackListed;
+
+    public Customer updatedCustomer(String address, String name, String phoneNumber, boolean isBlackListed) {
+        this.address = address;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.isBlackListed = isBlackListed;
+        return this;
+    }
+
+    public Customer incrementCusOrderCount() {
+        this.customerOrderCount += 1;
+        return this;
+    }
+
+
+
+
 }

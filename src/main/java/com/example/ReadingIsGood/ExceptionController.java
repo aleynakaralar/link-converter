@@ -1,6 +1,7 @@
 package com.example.ReadingIsGood;
 
 import com.example.ReadingIsGood.book.BookNotOrderedException;
+import com.example.ReadingIsGood.customer.CustomerNotFoundException;
 import com.example.ReadingIsGood.customer.CustomerNotOrderedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +20,10 @@ public class ExceptionController {
     public ResponseEntity<Object> exception(BookNotOrderedException exception) {
         return new ResponseEntity<>( "Book does not have enough stock", HttpStatus.BAD_REQUEST);
 
+    }
+
+    @ExceptionHandler(value = CustomerNotFoundException.class)
+    public ResponseEntity<Object> exception(CustomerNotFoundException exception) {
+        return new ResponseEntity<>("Customer not found", HttpStatus.BAD_REQUEST);
     }
 }

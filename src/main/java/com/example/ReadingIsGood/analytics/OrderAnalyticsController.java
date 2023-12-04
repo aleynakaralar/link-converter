@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class OrderAnalyticsController {
     private final OrderAnalyticsService orderAnalyticsService;
-    @GetMapping("/order/averageOrderPrice")
+    @GetMapping("/order/average-order-price")
     public double getAverageOrderPrice() {
         return orderAnalyticsService.getAverageOrderPrice();
     }

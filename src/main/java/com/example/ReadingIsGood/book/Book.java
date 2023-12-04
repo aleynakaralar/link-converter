@@ -28,7 +28,7 @@ public class Book {
     }
 
     public Book decrementStockCount() {
-        this.bookOrderCount -= 1;
+        this.stock -= 1;
         return this;
     }
 
@@ -43,13 +43,6 @@ public class Book {
         this.price = price;
         this.stock = stock;
         return this;
-    }
-
-
-
-    @JsonIgnore
-    public boolean inStock() {
-        return this.stock > 0;
     }
 
     @JsonIgnore

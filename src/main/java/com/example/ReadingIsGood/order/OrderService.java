@@ -36,30 +36,13 @@ public class OrderService {
     }
 
     public void deleteOrder(String id) {
-        Optional<Order> optionalOrder = repository.findById(id);
-        if (optionalOrder.isEmpty()) {
-            throw new RuntimeException("BOOK NOT FOUND");
-        }
-        repository.delete(optionalOrder.get());
+        repository.delete(repository.findById(id).orElseThrow(RuntimeException::new));
     }
-
     public Order getOrderDetails(String id) {
         Optional<Order> optionalOrder = repository.findById(id);
         return optionalOrder.orElse(null);
+
     }
-
-    /* public List<String> getOrdersByCustomerId(String id) {
-        List<Order> order = repository.findAll();
-        List<String> orderList = new ArrayList<>();
-        for (Order o : order){
-            String customerId = o.getCustomerId();
-            if (Objects.equals(customerId, id)){
-                orderList.add(o.getId());
-            }
-        }
-
-        return orderList;
-    }*/
     public List<String> getOrdersByCustomerId(String customerId) {
         return repository.findByCustomerId(customerId).stream()
                 .map(Order::getCustomerId)

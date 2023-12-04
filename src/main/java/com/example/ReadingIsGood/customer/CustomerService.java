@@ -1,21 +1,16 @@
 package com.example.ReadingIsGood.customer;
 
-
-import com.example.ReadingIsGood.order.Order;
-import com.example.ReadingIsGood.order.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
 
     private final CustomerRepository repository;
-    private OrderService orderService;
 
     public List<Customer> getCustomers() {
         return repository.findAll();
@@ -26,38 +21,19 @@ public class CustomerService {
     }
 
     public void updateExistingCustomer(UpdateCustomerRequest request, String id) {
-        Optional<Customer> optionalCustomer = repository.findById(id);
-        if (optionalCustomer.isEmpty()) {
-            throw new RuntimeException("USER NOT FOUND");
-        }
-        Customer customer = optionalCustomer.get();
-        customer.setAddress(request.getAddress());
-        customer.setName(request.getName());
-        customer.setPhoneNumber(request.getPhone());
-        customer.setBlackListed(request.isBlackListed());
+        Customer customer = repository.findById(id).orElseThrow(RuntimeException::new);
+        customer.updatedCustomer(request.getAddress(), request.getName(), request.getPhone(), request.isBlackListed());
         repository.save(customer);
     }
 
     public void deleteExistingCustomer(String id) {
-        Optional<Customer> optionalCustomer = repository.findById(id);
-        if (optionalCustomer.isEmpty()) {
-            throw new RuntimeException("USER NOT FOUND");
-        }
-        repository.delete(optionalCustomer.get());
+        repository.delete(repository.findById(id).orElseThrow(RuntimeException::new));
     }
-
     public void incrementCustomerOrderCount(String customerId) {
-        Optional<Customer> optionalCustomer = repository.findById(customerId);
-        if (optionalCustomer.isEmpty()) {
-            throw new RuntimeException("USER NOT FOUND");
-        }
-        Customer customer = optionalCustomer.get();
-        int customerOrderCount = customer.getCustomerOrderCount();
-        int incrementedCount = customerOrderCount + 1;
-        customer.setCustomerOrderCount(incrementedCount);
-        repository.save(customer);
+       Customer customer = repository.findById(customerId).orElseThrow(RuntimeException::new);
+       customer.incrementCusOrderCount();
+       repository.save(customer);
     }
-
     public void checkIsBlackListedValue(String customerId) {
         Optional<Customer> optionalCustomer = repository.findById(customerId);
         if (optionalCustomer.isEmpty()) {
@@ -68,11 +44,10 @@ public class CustomerService {
             throw new CustomerNotOrderedException();
         }
     }
-
     public Customer getCustomerById(String customerId) {
         Optional<Customer> optionalCustomer = repository.findById(customerId);
         if (optionalCustomer.isEmpty()) {
-            throw new RuntimeException("CUSTOMER NOT FOUND");
+            throw new CustomerNotFoundException();
         }
         return optionalCustomer.get();
     }
