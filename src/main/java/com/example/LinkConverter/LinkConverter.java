@@ -1,13 +1,13 @@
-package com.example.ReadingIsGood;
+package com.example.LinkConverter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReadingIsGoodApplication {
+public class LinkConverter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReadingIsGoodApplication.class, args);
+		SpringApplication.run(LinkConverter.class, args);
 	}
 
 }

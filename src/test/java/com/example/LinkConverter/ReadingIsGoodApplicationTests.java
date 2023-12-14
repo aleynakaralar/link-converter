@@ -1,4 +1,4 @@
-package com.example.ReadingIsGood;
+package com.example.LinkConverter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
