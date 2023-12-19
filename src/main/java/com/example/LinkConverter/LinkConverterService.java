@@ -1,6 +1,5 @@
-package com.example.LinkConverter.service;
-import com.example.LinkConverter.link.Link;
-import com.example.LinkConverter.repository.LinkConverterRepository;
+package com.example.LinkConverter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +7,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LinkConverterService {
     private final LinkConverterRepository repository;
-    public String convertWebUrlToDeeplink(String webUrl) {
+    private final ObjectMapper objectMapper;
+    public LinkResponse convertWebUrlToDeeplink(String webUrl) {
         String contentId = "";
         String boutiqueId = "";
         String merchantId = "";
@@ -44,6 +44,8 @@ public class LinkConverterService {
         link.setDeeplink(deeplink);
         link.setWebUrl(webUrl);
         repository.save(link);
-        return " Deeplink: " + deeplink + " WebUrl: " + webUrl;
+
+        return new LinkResponse(deeplink, webUrl);
+
     }
 }

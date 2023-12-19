@@ -1,13 +1,12 @@
-package com.example.LinkConverter.link;
+package com.example.LinkConverter;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Builder
 @Document(collection = "links")
 public class Link {
     @Id
@@ -15,9 +14,4 @@ public class Link {
     private String webUrl;
     private String deeplink;
 
-    public Link() {
-    }
-    public void setDeeplink(String deeplink) {
-        this.deeplink = deeplink;
-    }
 }
