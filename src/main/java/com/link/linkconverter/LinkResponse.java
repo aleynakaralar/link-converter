@@ -1,6 +1,7 @@
-package com.example.LinkConverter;
+package com.link.linkconverter;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 @AllArgsConstructor
@@ -9,6 +10,4 @@ import lombok.Setter;
 public class LinkResponse {
     private String deepLink;
     private String webUrl;
-
-
 }

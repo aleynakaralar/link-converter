@@ -1,7 +1,7 @@
-package com.example.LinkConverter;
+package com.link.linkconverter;
 
-import com.example.LinkConverter.Link;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface LinkConverterRepository extends MongoRepository<Link,String> {
+    Link findByWebUrl(String webUrl);
 }

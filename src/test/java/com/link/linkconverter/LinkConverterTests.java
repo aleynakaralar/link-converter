@@ -1,10 +1,10 @@
-package com.example.LinkConverter;
+package com.link.linkconverter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ReadingIsGoodApplicationTests {
+class LinkConverterTests {
 
 	@Test
 	void contextLoads() {

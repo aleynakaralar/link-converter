@@ -1,4 +1,4 @@
-package com.example.LinkConverter;
+package com.link.linkconverter;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -13,5 +13,4 @@ public class Link {
     private String id;
     private String webUrl;
     private String deeplink;
-
 }
