@@ -1,13 +1,15 @@
 package com.link.linkconverter;
-
+import jakarta.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LinkHelper {
+
+
     public String[] getUrlParts(String webUrl) {
         return webUrl.split("/");
     }
-
     public String getContentId(String[] parts) {
         return parts[4].split("-p-")[1].split("\\?")[0];
     }
@@ -25,23 +27,19 @@ public class LinkHelper {
         String querySearch = webUrl.split("\\?")[1];
         return querySearch;
     }
-
-    public String[] getParts(String deeplink) {
+    public String[] getPartsForDeeplink(String deeplink) {
         return deeplink.split("&");
     }
-
     public  String getContentIdForDeeplink(String[] parts) {
         String contentId;
         contentId = parts[1].split("ContentId=")[1];
         return contentId;
     }
-
-    public  String getBoutiqueId(String[] parts) {
+    public  String getBoutiqueIdForDeeplink(String[] parts) {
         String boutiqueId;
         boutiqueId = parts[2].split("=")[1].split("MerchantId=")[0];
         return boutiqueId;
     }
-
     public  String getMerchantId(String[] parts) {
         String merchantId;
         merchantId = parts[3].split("=")[1].split("ContentId=")[0];

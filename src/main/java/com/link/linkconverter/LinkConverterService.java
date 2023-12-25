@@ -1,4 +1,6 @@
 package com.link.linkconverter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +56,10 @@ public class LinkConverterService {
         String merchantId = "";
         String webUrl = "";
         if (deeplink.contains("Product")) {
-            String[] parts = helper.getParts(deeplink);
+            String[] parts = helper.getPartsForDeeplink(deeplink);
             contentId = helper.getContentIdForDeeplink(parts);
             merchantId = helper.getMerchantId(parts);
-            boutiqueId = helper.getBoutiqueId(parts);
+            boutiqueId = helper.getBoutiqueIdForDeeplink(parts);
 
             webUrl = "https://www.aleynakaralar.com/brand/name-p-" +
                     (contentId.isEmpty() ? "" :  contentId) +

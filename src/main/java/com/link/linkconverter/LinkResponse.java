@@ -1,12 +1,11 @@
 package com.link.linkconverter;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class LinkResponse {
     private String deepLink;
     private String webUrl;
