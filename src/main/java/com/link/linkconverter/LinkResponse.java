@@ -1,5 +1,6 @@
 package com.link.linkconverter;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @AllArgsConstructor

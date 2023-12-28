@@ -1,20 +1,19 @@
 package com.link.linkconverter;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
 public class LinkConverterService {
     private final LinkConverterRepository repository;
     private final LinkHelper helper;
-
     public LinkResponse convertWebUrlToDeeplink(String webUrl) {
-        Link existingLink = repository.findByWebUrl(webUrl);
+       /* Link existingLink = repository.findByWebUrl(webUrl);
         if (existingLink != null) {
             return new LinkResponse(existingLink.getDeeplink(), existingLink.getWebUrl());
-        }
+        }*/
         String contentId = "";
         String boutiqueId = "";
         String merchantId = "";
@@ -49,17 +48,16 @@ public class LinkConverterService {
         repository.save(link);
         return new LinkResponse(deeplink, webUrl);
     }
-
     public LinkResponse convertDeeplinkToWebUrl(String deeplink) {
         String contentId = "";
         String boutiqueId = "";
         String merchantId = "";
         String webUrl = "";
         if (deeplink.contains("Product")) {
-            String[] parts = helper.getPartsForDeeplink(deeplink);
-            contentId = helper.getContentIdForDeeplink(parts);
-            merchantId = helper.getMerchantId(parts);
-            boutiqueId = helper.getBoutiqueIdForDeeplink(parts);
+            String[] partsForDeeplink = helper.getPartsForDeeplink(deeplink);
+            contentId = helper.getContentIdForDeeplink(partsForDeeplink);
+            boutiqueId = helper.getBoutiqueIdForDeeplink(partsForDeeplink);
+            merchantId = helper.getMerchantIdForDeeplink(partsForDeeplink);
 
             webUrl = "https://www.aleynakaralar.com/brand/name-p-" +
                     (contentId.isEmpty() ? "" :  contentId) +
@@ -69,7 +67,7 @@ public class LinkConverterService {
             String querySearchDeeplink = helper.getSearchDeeplink(deeplink);
             webUrl = "https://www.aleynakaralar.com/sr?q=" +
                     (querySearchDeeplink.isEmpty() ? "" :  querySearchDeeplink);
-        }else {
+         } else {
             webUrl = "https://www.aleynakaralar.com/";
         }
         Link link = new Link();

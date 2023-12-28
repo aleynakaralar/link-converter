@@ -1,7 +1,6 @@
 package com.link.linkconverter;
 
 import lombok.*;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
